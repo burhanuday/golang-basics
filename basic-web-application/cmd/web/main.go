@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -29,8 +30,13 @@ func main() {
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	srv := &http.Server{
+		Addr:    port,
+		Handler: routes(&app),
+	}
+	err = srv.ListenAndServe()
 
-	http.ListenAndServe(port, nil)
+	if err != nil {
+		fmt.Println("error while starting server")
+	}
 }
