@@ -4,6 +4,11 @@
     <div class="col">
       <h1>This is the about page</h1>
       <p>From template: {{index .StringMap "test"}}</p>
+      <p>
+        {{if ne (index .StringMap "remoteIP") ""}} Your remote ip address is
+        {{index .StringMap "remoteIP"}} {{else}} I dont know your Ip. Visit home
+        page first {{end}}
+      </p>
     </div>
   </div>
 </div>
